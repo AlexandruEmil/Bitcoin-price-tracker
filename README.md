@@ -11,7 +11,7 @@ Easy price refresh: Update prices with a single click.
 Clone this repository:
 bash
 ````
-git clone https://github.com/your-username/crypto-price-tracker.git
+git clone https://github.com/AlexandruEmil/crypto-price-tracker.git
 ````
 cd crypto-price-tracker
 Install dependencies (if needed):
