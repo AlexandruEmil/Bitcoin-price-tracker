@@ -1,39 +1,53 @@
 import requests
-import pandas as pd
-from tabulate import tabulate
+import tkinter as tk
+from tkinter import ttk
 
 def get_crypto_price(crypto_ids=["bitcoin", "ethereum", "cardano"], vs_currency="usd"):
     url = "https://api.coingecko.com/api/v3/simple/price"
     params = {
-        "ids": ",".join(crypto_ids),  # lista criptomonedelor pe care le dorim
-        "vs_currencies": vs_currency  # moneda în care vrem prețul (usd, eur, etc.)
+        "ids": ",".join(crypto_ids),
+        "vs_currencies": vs_currency
     }
-    
-    # Facem cererea
     response = requests.get(url, params=params)
-    
-    # Verificăm răspunsul și extragem datele
     if response.status_code == 200:
-        data = response.json()
-        return data
+        return response.json()
     else:
-        print("A apărut o eroare:", response.status_code)
+        print("An error occurred:", response.status_code)
         return None
 
-def display_prices(data):
-    # Cream o listă de date pentru a le structura frumos
-    rows = []
-    for crypto, details in data.items():
-        price = details.get("usd")
-        rows.append([crypto.capitalize(), price])
-    
-    # Afișăm tabelul
-    print(tabulate(rows, headers=["Cryptocurrency", "Price (USD)"], tablefmt="grid"))
+def update_prices():
+    print("Button clicked!")
+    data = get_crypto_price()
+    for row in tree.get_children():
+        tree.delete(row)
 
-def main():
-    crypto_data = get_crypto_price()
-    if crypto_data:
-        display_prices(crypto_data)
+    if data:
+        for crypto, details in data.items():
+            price = details.get("usd")
+            tree.insert("", "end", values=(crypto.capitalize(), f"{price} USD"))
 
-if __name__ == "__main__":
-    main()
+# Main application window
+root = tk.Tk()
+root.title("Cryptocurrency Price Tracker")
+root.geometry("400x350")
+root.update()
+
+# Application title
+title = tk.Label(root, text="Cryptocurrency Prices", font=("Arial", 16))
+title.grid(row=0, column=0, columnspan=2, pady=10)
+
+# Table setup
+columns = ("Cryptocurrency", "Price (USD)")
+tree = ttk.Treeview(root, columns=columns, show="headings")
+tree.heading("Cryptocurrency", text="Cryptocurrency")
+tree.heading("Price (USD)", text="Price (USD)")
+tree.grid(row=1, column=0, columnspan=2, pady=20)
+
+# Update button
+update_button = tk.Button(root, text="Update Prices", command=update_prices)
+update_button.grid(row=2, column=0, columnspan=2, pady=10)
+
+# Initial call to populate the table
+update_prices()
+
+root.mainloop()
