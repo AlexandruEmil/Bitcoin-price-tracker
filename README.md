@@ -32,7 +32,7 @@ python main.py
 Open the application to see current prices.
 
 # Project Structure
-main.py: The main script that contains logic for fetching and displaying prices.
+main.py: The main script that contains GUI logic for fetching and displaying prices.
 
 > [!NOTE]
 This app uses the free CoinGecko API to fetch cryptocurrency prices. No API key is required.
