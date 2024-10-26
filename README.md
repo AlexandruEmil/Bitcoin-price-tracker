@@ -13,10 +13,11 @@ bash
 ````
 git clone https://github.com/AlexandruEmil/Bitcoin-price-tracker.git
 ````
-cd crypto-price-tracker
-Install dependencies (if needed):
+cd Bitcoin-price-tracker
 
-# Install requests to handle API requests:
+# Install dependencies (if needed):
+
+Install requests to handle API requests:
 bash
 Copy code
 ````
@@ -25,7 +26,7 @@ pip install requests
 # Run the application:
 bash
 ````
-python crypto_price_tracker.py
+python main.py
 ````
 # Usage
 Open the application to see current prices.
