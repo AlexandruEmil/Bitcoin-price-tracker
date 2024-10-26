@@ -9,7 +9,7 @@ Easy price refresh: Update prices with a single click.
 # Installation
 
 Clone this repository:
-bash
+
 ````
 git clone https://github.com/AlexandruEmil/Bitcoin-price-tracker.git
 ````
@@ -18,13 +18,13 @@ cd Bitcoin-price-tracker
 # Install dependencies (if needed):
 
 Install requests to handle API requests:
-bash
+
 Copy code
 ````
 pip install requests
 ````
 # Run the application:
-bash
+
 ````
 python main.py
 ````
